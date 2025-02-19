@@ -18,24 +18,29 @@ const App = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-white">
+      <section className="pt-32 pb-16 bg-white relative">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-6">
-              Excelência em<br />Odontologia Estética
-            </h1>
-            <div className="flex items-center justify-center space-x-4 mb-8">
-              <img src="/images/dentista.jpg" alt="Doutor" className="w-12 h-12 rounded-full object-cover" />
-              <div className="text-left">
-                <p className="text-sm text-gray-600">Odontólogo especialista em estética dental</p>
-                <p className="text-sm text-gray-600">Mais de 15 anos de experiência</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="text-left">
+              <h1 className="text-5xl font-bold text-gray-900 mb-6">
+                Excelência em<br />Odontologia Estética
+              </h1>
+              <div className="flex items-center space-x-4 mb-8">
+                <img src="./public/images/header.jpg" alt="Doutor" className="w-12 h-12 rounded-full object-cover" />
+                <div className="text-left">
+                  <p className="text-sm text-gray-600">Thainá Firmino, uma profissional destacada com formação em odontologia pela XXX.</p>
+                </div>
+              </div>
+              <button className="bg-gray-900 text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-all duration-300">
+                AGENDE SEU HORÁRIO
+              </button>
+              <div className="mt-8">
+                <p className="text-sm text-gray-600 mb-2">Reconhecido por</p>
+                <img src="/images/forbes-logo.png" alt="Forbes" className="h-8 opacity-70" />
               </div>
             </div>
-            <button className="bg-gray-900 text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-all duration-300">
-              Agende sua Consulta
-            </button>
-            <div className="mt-12">
-              <img src="/images/forbes-logo.png" alt="Forbes" className="h-8 mx-auto opacity-50" />
+            <div className="relative">
+              <img src="/images/header.jpg" alt="Doutor" className="w-full h-[600px] object-cover rounded-lg shadow-xl" />
             </div>
           </div>
         </div>
@@ -100,7 +105,7 @@ const App = () => {
               <img src="/images/antes-1.jpg" alt="Antes" className="w-full h-80 rounded-lg object-cover" />
               <img src="/images/depois-1.jpg" alt="Depois" className="w-full h-80 rounded-lg object-cover" />
             </div>
-            <button className="bg-gray-900 text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-all duration-300">
+            <button className="bg-gray-900 text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
               Agende uma avaliação
             </button>
           </div>
