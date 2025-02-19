@@ -8,26 +8,37 @@
   }
 
   body {
-    @apply text-gray-900 antialiased;
+    @apply font-sans text-primary-400 antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-sans;
+    @apply font-display tracking-tight;
   }
 }
 
 @layer components {
   .nav-link {
-    @apply relative text-gray-600 hover:text-gray-900 transition-colors duration-300;
+    @apply relative text-primary-300 hover:text-primary-400 transition-colors duration-200 text-sm font-medium tracking-wide font-sans;
   }
 
   .nav-link::after {
     content: '';
-    @apply absolute left-0 bottom-0 w-0 h-0.5 bg-gray-900 transition-all duration-300;
+    @apply absolute left-0 -bottom-1 w-0 h-0.5 bg-primary-300 transition-all duration-300 rounded-full;
   }
 
   .nav-link:hover::after {
     @apply w-full;
+  }
+
+  /* Mobile nav styles */
+  @media (max-width: 768px) {
+    .nav-link::after {
+      @apply hidden;
+    }
+    
+    .nav-link {
+      @apply text-primary-400 text-base py-2 block w-full hover:bg-primary-50 rounded-lg px-4;
+    }
   }
 
   .service-card {
@@ -47,11 +58,11 @@
   }
 
   .button-primary {
-    @apply bg-gray-900 text-white px-8 py-3 rounded-lg transition-all duration-300;
+    @apply bg-primary-300 text-white px-8 py-3 rounded-lg transition-all duration-300 font-sans font-bold uppercase tracking-wide text-sm;
   }
 
   .button-primary:hover {
-    @apply bg-gray-800 transform scale-105 shadow-lg;
+    @apply bg-primary-400 transform scale-105 shadow-lg;
   }
 
   .image-gallery {
@@ -63,11 +74,11 @@
   }
 
   .section-title {
-    @apply text-2xl font-semibold text-center mb-12;
+    @apply text-2xl font-display text-primary-400 tracking-tight;
   }
 
   .section-subtitle {
-    @apply text-gray-600 text-center mb-8 max-w-2xl mx-auto;
+    @apply font-sans text-primary-300 text-center mb-8 max-w-2xl mx-auto;
   }
 }
 
@@ -115,14 +126,6 @@
 @layer components {
   .btn-primary {
     @apply bg-gray-900 text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-all duration-300;
-  }
-
-  .nav-link {
-    @apply text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm;
-  }
-
-  .section-title {
-    @apply text-2xl font-semibold text-gray-900 tracking-tight;
   }
 
   .card {
