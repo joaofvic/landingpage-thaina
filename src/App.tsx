@@ -84,7 +84,7 @@ const App = () => {
               <div className="flex items-center space-x-4 mb-8">
                 <img src="/images/header.jpg" alt="Doutor" className="w-12 h-12 rounded-full object-cover border-2 border-primary-100" />
                 <div className="text-left">
-                  <p className="text-sm font-sans text-primary-300">Thainá Firmino, uma profissional destacada com formação em odontologia pela XXX.</p>
+                  <p className="text-sm font-sans text-primary-300">Thainá Firmino, uma profissional destacada com formação em odontologia pela Unifametro.</p>
                 </div>
               </div>
               <button className="button-primary">
@@ -129,21 +129,56 @@ const App = () => {
               Como podemos transformar<br />
               <span className="text-primary-300">seu sorriso e sua vida?</span>
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <img src="/images/ortodontia.jpg" alt="Ortodontia" className="w-full h-64 rounded-lg mb-4 object-cover" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="text-center p-6 bg-white rounded-lg shadow-soft hover:shadow-medium transition-all duration-300">
+                <div className="relative pb-[75%] mb-4">
+                  <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" 
+                    alt="Clareamento Dental" 
+                    className="absolute inset-0 w-full h-full rounded-lg object-contain bg-gray-50" 
+                  />
+                </div>
+                <h3 className="text-lg font-display text-primary-400 mb-2">Clareamento Dental</h3>
+                <p className="text-sm font-sans text-primary-300">Sorria com segurança, o clareamento dental transforma o seu sorriso, deixando seus dentes mais brancos e radiantes.</p>
+              </div>
+              <div className="text-center p-6 bg-white rounded-lg shadow-soft hover:shadow-medium transition-all duration-300">
+                <div className="relative pb-[75%] mb-4">
+                  <img src="/images/ortodontia.jpeg" 
+                    alt="Ortodontia" 
+                    className="absolute inset-0 w-full h-full rounded-lg object-contain bg-gray-50" 
+                  />
+                </div>
                 <h3 className="text-lg font-display text-primary-400 mb-2">Ortodontia</h3>
-                <p className="text-sm font-sans text-primary-300">Alinhe seus dentes com as técnicas mais modernas e eficientes.</p>
+                <p className="text-sm font-sans text-primary-300">Transforme seu sorriso com o aparelho dental, melhoramos a estética e a sua saúde bucal de forma eficaz.</p>
               </div>
-              <div className="text-center">
-                <img src="/images/botox.jpg" alt="Botox" className="w-full h-64 rounded-lg mb-4 object-cover" />
-                <h3 className="text-lg font-display text-primary-400 mb-2">Botox</h3>
-                <p className="text-sm font-sans text-primary-300">Harmonização facial completa para realçar sua beleza natural.</p>
+              <div className="text-center p-6 bg-white rounded-lg shadow-soft hover:shadow-medium transition-all duration-300">
+                <div className="relative pb-[75%] mb-4">
+                  <img src="/images/gengivoplastia.jpeg" 
+                    alt="Gengivoplastia" 
+                    className="absolute inset-0 w-full h-full rounded-lg object-contain bg-gray-50" 
+                  />
+                </div>
+                <h3 className="text-lg font-display text-primary-400 mb-2">Gengivoplastia</h3>
+                <p className="text-sm font-sans text-primary-300">Recupere a harmonia do seu sorriso, corrigimos o contorno da gengiva e realçamos a estética dental de forma rápida e eficaz.</p>
               </div>
-              <div className="text-center">
-                <img src="/images/lentes.jpg" alt="Lentes" className="w-full h-64 rounded-lg mb-4 object-cover" />
-                <h3 className="text-lg font-display text-primary-400 mb-2">Lentes de Contato</h3>
-                <p className="text-sm font-sans text-primary-300">Transforme seu sorriso com lentes ultra finas e naturais.</p>
+              <div className="text-center p-6 bg-white rounded-lg shadow-soft hover:shadow-medium transition-all duration-300">
+                <div className="relative pb-[75%] mb-4">
+                  <img src="/images/limpeza.jpeg" 
+                    alt="Limpeza Dental" 
+                    className="absolute inset-0 w-full h-full rounded-lg object-contain bg-gray-50" 
+                  />
+                </div>
+                <h3 className="text-lg font-display text-primary-400 mb-2">Limpeza Dental</h3>
+                <p className="text-sm font-sans text-primary-300">Mantenha seu sorriso saudável e radiante, removemos a placa, tártaro de forma rápida e indolor e evite problemas bucais.</p>
+              </div>
+              <div className="text-center p-6 bg-white rounded-lg shadow-soft hover:shadow-medium transition-all duration-300">
+                <div className="relative pb-[75%] mb-4">
+                  <img src="/images/restauração.jpeg" 
+                    alt="Restaurações Dentais" 
+                    className="absolute inset-0 w-full h-full rounded-lg object-contain bg-gray-50" 
+                  />
+                </div>
+                <h3 className="text-lg font-display text-primary-400 mb-2">Restaurações Dentais</h3>
+                <p className="text-sm font-sans text-primary-300">Recupere a funcionalidade e estética do seu sorriso, solução eficaz para dentes danificados, deixando seu sorriso bonito e saudável.</p>
               </div>
             </div>
           </div>
@@ -197,7 +232,7 @@ const App = () => {
               Nosso Consultório
             </h2>
             <p className="text-primary-300 mb-8 max-w-2xl">
-              Contamos com a mais alta tecnologia e uma equipe de profissionais altamente capacitados para oferecer o melhor atendimento.
+            Nosso consultório oferece um atendimento odontológico humanizado, com profissionais altamente capacitados e sempre atualizados com as últimas inovações da área. Contamos com tecnologia de ponta para proporcionar o melhor cuidado para o seu sorriso, em um ambiente moderno e acolhedor. Venha nos visitar e experimente o cuidado diferenciado que você merece!
             </p>
             <div className="grid grid-cols-2 gap-4">
               <img src="/images/consultorio-1.jpg" alt="Consultório" className="w-full h-80 rounded-lg object-cover shadow-lg" />
