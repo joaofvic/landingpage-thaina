@@ -7,7 +7,7 @@ const App = () => {
 
   const services = [
     {
-      image: "./public/images/clareamento.jpeg",
+      image: "/images/clareamento.jpeg",
       title: "Clareamento Dental",
       description: "Sorria com segurança, o clareamento dental transforma o seu sorriso, deixando seus dentes mais brancos e radiantes."
     },
