@@ -3,6 +3,47 @@ import './index.css';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const services = [
+    {
+      image: "./public/images/clareamento.jpeg",
+      title: "Clareamento Dental",
+      description: "Sorria com segurança, o clareamento dental transforma o seu sorriso, deixando seus dentes mais brancos e radiantes."
+    },
+    {
+      image: "/images/ortodontia.jpeg",
+      title: "Ortodontia",
+      description: "Transforme seu sorriso com o aparelho dental, melhoramos a estética e a sua saúde bucal de forma eficaz."
+    },
+    {
+      image: "/images/gengivoplastia.jpeg",
+      title: "Gengivoplastia",
+      description: "Recupere a harmonia do seu sorriso, corrigimos o contorno da gengiva e realçamos a estética dental de forma rápida e eficaz."
+    },
+    {
+      image: "/images/limpeza.jpeg",
+      title: "Limpeza Dental",
+      description: "Mantenha seu sorriso saudável e radiante, removemos a placa, tártaro de forma rápida e indolor e evite problemas bucais."
+    },
+    {
+      image: "/images/restauração.jpeg",
+      title: "Restaurações Dentais",
+      description: "Recupere a funcionalidade e estética do seu sorriso, solução eficaz para dentes danificados, deixando seu sorriso bonito e saudável."
+    }
+  ];
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % services.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + services.length) % services.length);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
 
   return (
     <div className="min-h-screen bg-primary-50">
@@ -129,96 +170,70 @@ const App = () => {
               Como podemos transformar<br />
               <span className="text-primary-300">seu sorriso e sua vida?</span>
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<<<<<<< HEAD
-              <div className="text-center p-6 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-300">
-                <div className="relative pb-[100%] mb-4 rounded-xl overflow-hidden">
-                  <img src="./public/images/clareamento.jpeg" 
-                    alt="Clareamento Dental" 
-                    className="absolute inset-0 w-full h-full object-contain" 
-=======
-              <div className="text-center p-6 bg-white rounded-lg shadow-soft hover:shadow-medium transition-all duration-300">
-                <div className="relative pb-[75%] mb-4">
-                  <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" 
-                    alt="Clareamento Dental" 
-                    className="absolute inset-0 w-full h-full rounded-lg object-contain bg-gray-50" 
->>>>>>> 099755caa0e1140baf7a8d01cf5d281b3afa3e7b
-                  />
+            <div className="relative max-w-5xl mx-auto overflow-hidden">
+              <div className="relative px-4 md:px-16">
+                <div className="overflow-hidden">
+                  <div 
+                    className="flex transition-transform duration-700 ease-in-out"
+                    style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                  >
+                    {services.map((service, index) => (
+                      <div 
+                        key={index}
+                        className="w-full flex-shrink-0 px-2 md:px-4"
+                      >
+                        <div className={`transform transition-all duration-500 ${
+                          currentSlide === index 
+                            ? 'scale-100 opacity-100' 
+                            : 'scale-90 opacity-50 blur-sm'
+                        }`}>
+                          <div className="text-center p-6 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-300">
+                            <div className="relative pb-[75%] mb-4 rounded-xl overflow-hidden">
+                              <img 
+                                src={service.image}
+                                alt={service.title}
+                                className="absolute inset-0 w-full h-full object-contain"
+                              />
+                            </div>
+                            <h3 className="text-lg font-display text-primary-400 mb-2">{service.title}</h3>
+                            <p className="text-sm font-sans text-primary-300">{service.description}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <h3 className="text-lg font-display text-primary-400 mb-2">Clareamento Dental</h3>
-                <p className="text-sm font-sans text-primary-300">Sorria com segurança, o clareamento dental transforma o seu sorriso, deixando seus dentes mais brancos e radiantes.</p>
-              </div>
-<<<<<<< HEAD
-              <div className="text-center p-6 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-300">
-                <div className="relative pb-[100%] mb-4 rounded-xl overflow-hidden">
-                  <img src="/images/ortodontia.jpeg" 
-                    alt="Ortodontia" 
-                    className="absolute inset-0 w-full h-full object-contain" 
-=======
-              <div className="text-center p-6 bg-white rounded-lg shadow-soft hover:shadow-medium transition-all duration-300">
-                <div className="relative pb-[75%] mb-4">
-                  <img src="/images/ortodontia.jpeg" 
-                    alt="Ortodontia" 
-                    className="absolute inset-0 w-full h-full rounded-lg object-contain bg-gray-50" 
->>>>>>> 099755caa0e1140baf7a8d01cf5d281b3afa3e7b
-                  />
+
+                {/* Botões de navegação */}
+                <button 
+                  onClick={prevSlide}
+                  className="absolute left-0 md:left-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-primary-50 transition-colors z-10"
+                >
+                  <svg className="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button 
+                  onClick={nextSlide}
+                  className="absolute right-0 md:right-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-primary-50 transition-colors z-10"
+                >
+                  <svg className="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+
+                {/* Indicadores de slide */}
+                <div className="flex justify-center mt-8 space-x-2">
+                  {services.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => goToSlide(index)}
+                      className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                        currentSlide === index ? 'bg-primary-400 w-4' : 'bg-primary-100'
+                      }`}
+                    />
+                  ))}
                 </div>
-                <h3 className="text-lg font-display text-primary-400 mb-2">Ortodontia</h3>
-                <p className="text-sm font-sans text-primary-300">Transforme seu sorriso com o aparelho dental, melhoramos a estética e a sua saúde bucal de forma eficaz.</p>
-              </div>
-<<<<<<< HEAD
-              <div className="text-center p-6 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-300">
-                <div className="relative pb-[100%] mb-4 rounded-xl overflow-hidden">
-                  <img src="/images/gengivoplastia.jpeg" 
-                    alt="Gengivoplastia" 
-                    className="absolute inset-0 w-full h-full object-contain" 
-=======
-              <div className="text-center p-6 bg-white rounded-lg shadow-soft hover:shadow-medium transition-all duration-300">
-                <div className="relative pb-[75%] mb-4">
-                  <img src="/images/gengivoplastia.jpeg" 
-                    alt="Gengivoplastia" 
-                    className="absolute inset-0 w-full h-full rounded-lg object-contain bg-gray-50" 
->>>>>>> 099755caa0e1140baf7a8d01cf5d281b3afa3e7b
-                  />
-                </div>
-                <h3 className="text-lg font-display text-primary-400 mb-2">Gengivoplastia</h3>
-                <p className="text-sm font-sans text-primary-300">Recupere a harmonia do seu sorriso, corrigimos o contorno da gengiva e realçamos a estética dental de forma rápida e eficaz.</p>
-              </div>
-<<<<<<< HEAD
-              <div className="text-center p-6 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-300">
-                <div className="relative pb-[100%] mb-4 rounded-xl overflow-hidden">
-                  <img src="/images/limpeza.jpeg" 
-                    alt="Limpeza Dental" 
-                    className="absolute inset-0 w-full h-full object-contain" 
-=======
-              <div className="text-center p-6 bg-white rounded-lg shadow-soft hover:shadow-medium transition-all duration-300">
-                <div className="relative pb-[75%] mb-4">
-                  <img src="/images/limpeza.jpeg" 
-                    alt="Limpeza Dental" 
-                    className="absolute inset-0 w-full h-full rounded-lg object-contain bg-gray-50" 
->>>>>>> 099755caa0e1140baf7a8d01cf5d281b3afa3e7b
-                  />
-                </div>
-                <h3 className="text-lg font-display text-primary-400 mb-2">Limpeza Dental</h3>
-                <p className="text-sm font-sans text-primary-300">Mantenha seu sorriso saudável e radiante, removemos a placa, tártaro de forma rápida e indolor e evite problemas bucais.</p>
-              </div>
-<<<<<<< HEAD
-              <div className="text-center p-6 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-300">
-                <div className="relative pb-[100%] mb-4 rounded-xl overflow-hidden">
-                  <img src="/images/restauração.jpeg" 
-                    alt="Restaurações Dentais" 
-                    className="absolute inset-0 w-full h-full object-contain" 
-=======
-              <div className="text-center p-6 bg-white rounded-lg shadow-soft hover:shadow-medium transition-all duration-300">
-                <div className="relative pb-[75%] mb-4">
-                  <img src="/images/restauração.jpeg" 
-                    alt="Restaurações Dentais" 
-                    className="absolute inset-0 w-full h-full rounded-lg object-contain bg-gray-50" 
->>>>>>> 099755caa0e1140baf7a8d01cf5d281b3afa3e7b
-                  />
-                </div>
-                <h3 className="text-lg font-display text-primary-400 mb-2">Restaurações Dentais</h3>
-                <p className="text-sm font-sans text-primary-300">Recupere a funcionalidade e estética do seu sorriso, solução eficaz para dentes danificados, deixando seu sorriso bonito e saudável.</p>
               </div>
             </div>
           </div>
