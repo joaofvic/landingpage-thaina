@@ -1,3 +1,30 @@
+@font-face {
+  font-family: 'Salinas';
+  src: url('/fonts/Salinas-Display.woff2') format('woff2'),
+       url('/fonts/Salinas-Display.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Glacial Indifference';
+  src: url('/fonts/GlacialIndifference-Regular.woff2') format('woff2'),
+       url('/fonts/GlacialIndifference-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Glacial Indifference';
+  src: url('/fonts/GlacialIndifference-Bold.woff2') format('woff2'),
+       url('/fonts/GlacialIndifference-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,17 +35,19 @@
   }
 
   body {
-    @apply font-sans text-primary-400 antialiased;
+    @apply antialiased text-primary-400;
+    font-family: 'Glacial Indifference', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight;
+    font-family: 'Salinas', serif;
+    @apply tracking-tight;
   }
 }
 
 @layer components {
   .nav-link {
-    @apply relative text-primary-300 hover:text-primary-400 transition-colors duration-200 text-sm font-medium tracking-wide font-sans;
+    @apply relative text-primary-300 hover:text-primary-400 transition-colors duration-200 text-sm font-medium tracking-wide;
   }
 
   .nav-link::after {
@@ -58,7 +87,7 @@
   }
 
   .button-primary {
-    @apply bg-primary-300 text-white px-8 py-3 rounded-lg transition-all duration-300 font-sans font-bold uppercase tracking-wide text-sm;
+    @apply bg-primary-300 text-white px-8 py-3 rounded-lg transition-all duration-300 uppercase tracking-wide text-sm font-bold;
   }
 
   .button-primary:hover {
@@ -74,11 +103,11 @@
   }
 
   .section-title {
-    @apply text-2xl font-display text-primary-400 tracking-tight;
+    @apply text-2xl text-primary-400 tracking-tight font-display;
   }
 
   .section-subtitle {
-    @apply font-sans text-primary-300 text-center mb-8 max-w-2xl mx-auto;
+    @apply text-primary-300 text-center mb-8 max-w-2xl mx-auto;
   }
 }
 
@@ -257,5 +286,5 @@
 
 /* Custom Selection */
 ::selection {
-  @apply bg-gray-900 text-white;
+  @apply bg-primary-400 text-white;
 }

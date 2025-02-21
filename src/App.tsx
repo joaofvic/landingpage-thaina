@@ -166,37 +166,37 @@ const App = () => {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-display text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
               Como podemos transformar<br />
-              <span className="text-primary-300">seu sorriso e sua vida?</span>
+              <span className="text-primary-400 bg-gradient-to-r from-primary-300 to-primary-400 bg-clip-text text-transparent">seu sorriso e sua vida?</span>
             </h2>
             <div className="relative max-w-5xl mx-auto overflow-hidden">
-              <div className="relative px-4 md:px-16">
+              <div className="relative px-4 md:px-12">
                 <div className="overflow-hidden">
                   <div 
-                    className="flex transition-transform duration-700 ease-in-out"
+                    className="flex transition-all duration-700 ease-in-out"
                     style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                   >
                     {services.map((service, index) => (
                       <div 
                         key={index}
-                        className="w-full flex-shrink-0 px-2 md:px-4"
+                        className="w-full flex-shrink-0 px-3 md:px-4"
                       >
                         <div className={`transform transition-all duration-500 ${
                           currentSlide === index 
-                            ? 'scale-100 opacity-100' 
-                            : 'scale-90 opacity-50 blur-sm'
+                            ? 'scale-100 opacity-100 translate-y-0' 
+                            : 'scale-90 opacity-40 blur-sm translate-y-4'
                         }`}>
-                          <div className="text-center p-6 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-300">
-                            <div className="relative pb-[75%] mb-4 rounded-xl overflow-hidden">
+                          <div className="text-center p-8 bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.18)] transition-all duration-500">
+                            <div className="relative pb-[85%] mb-6 rounded-[1.5rem] overflow-hidden group">
                               <img 
                                 src={service.image}
                                 alt={service.title}
-                                className="absolute inset-0 w-full h-full object-contain"
+                                className="absolute inset-0 w-full h-full object-cover rounded-[1.5rem] transition-transform duration-500 group-hover:scale-105"
                               />
                             </div>
-                            <h3 className="text-lg font-display text-primary-400 mb-2">{service.title}</h3>
-                            <p className="text-sm font-sans text-primary-300">{service.description}</p>
+                            <h3 className="text-xl font-bold text-primary-400 mb-3">{service.title}</h3>
+                            <p className="text-base leading-relaxed text-primary-300 max-w-md mx-auto">{service.description}</p>
                           </div>
                         </div>
                       </div>
@@ -207,29 +207,31 @@ const App = () => {
                 {/* Botões de navegação */}
                 <button 
                   onClick={prevSlide}
-                  className="absolute left-0 md:left-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-primary-50 transition-colors z-10"
+                  className="absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 bg-white p-4 rounded-full shadow-[0_4px_20px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_25px_rgb(0,0,0,0.18)] hover:bg-primary-50 transition-all duration-300 z-20 group"
                 >
-                  <svg className="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  <svg className="w-8 h-8 text-primary-400 group-hover:text-primary-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
                   </svg>
                 </button>
                 <button 
                   onClick={nextSlide}
-                  className="absolute right-0 md:right-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-primary-50 transition-colors z-10"
+                  className="absolute -right-2 md:-right-6 top-1/2 -translate-y-1/2 bg-white p-4 rounded-full shadow-[0_4px_20px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_25px_rgb(0,0,0,0.18)] hover:bg-primary-50 transition-all duration-300 z-20 group"
                 >
-                  <svg className="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  <svg className="w-8 h-8 text-primary-400 group-hover:text-primary-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                   </svg>
                 </button>
 
                 {/* Indicadores de slide */}
-                <div className="flex justify-center mt-8 space-x-2">
+                <div className="flex justify-center mt-12 space-x-3">
                   {services.map((_, index) => (
                     <button
                       key={index}
                       onClick={() => goToSlide(index)}
-                      className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                        currentSlide === index ? 'bg-primary-400 w-4' : 'bg-primary-100'
+                      className={`transition-all duration-500 rounded-full ${
+                        currentSlide === index 
+                          ? 'w-12 h-3 bg-primary-400' 
+                          : 'w-3 h-3 bg-primary-200 hover:bg-primary-300'
                       }`}
                     />
                   ))}
