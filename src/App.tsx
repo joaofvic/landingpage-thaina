@@ -130,51 +130,91 @@ const App = () => {
               <span className="text-primary-300">seu sorriso e sua vida?</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<<<<<<< HEAD
               <div className="text-center p-6 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-300">
                 <div className="relative pb-[100%] mb-4 rounded-xl overflow-hidden">
                   <img src="./public/images/clareamento.jpeg" 
                     alt="Clareamento Dental" 
                     className="absolute inset-0 w-full h-full object-contain" 
+=======
+              <div className="text-center p-6 bg-white rounded-lg shadow-soft hover:shadow-medium transition-all duration-300">
+                <div className="relative pb-[75%] mb-4">
+                  <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" 
+                    alt="Clareamento Dental" 
+                    className="absolute inset-0 w-full h-full rounded-lg object-contain bg-gray-50" 
+>>>>>>> 099755caa0e1140baf7a8d01cf5d281b3afa3e7b
                   />
                 </div>
                 <h3 className="text-lg font-display text-primary-400 mb-2">Clareamento Dental</h3>
                 <p className="text-sm font-sans text-primary-300">Sorria com segurança, o clareamento dental transforma o seu sorriso, deixando seus dentes mais brancos e radiantes.</p>
               </div>
+<<<<<<< HEAD
               <div className="text-center p-6 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-300">
                 <div className="relative pb-[100%] mb-4 rounded-xl overflow-hidden">
                   <img src="/images/ortodontia.jpeg" 
                     alt="Ortodontia" 
                     className="absolute inset-0 w-full h-full object-contain" 
+=======
+              <div className="text-center p-6 bg-white rounded-lg shadow-soft hover:shadow-medium transition-all duration-300">
+                <div className="relative pb-[75%] mb-4">
+                  <img src="/images/ortodontia.jpeg" 
+                    alt="Ortodontia" 
+                    className="absolute inset-0 w-full h-full rounded-lg object-contain bg-gray-50" 
+>>>>>>> 099755caa0e1140baf7a8d01cf5d281b3afa3e7b
                   />
                 </div>
                 <h3 className="text-lg font-display text-primary-400 mb-2">Ortodontia</h3>
                 <p className="text-sm font-sans text-primary-300">Transforme seu sorriso com o aparelho dental, melhoramos a estética e a sua saúde bucal de forma eficaz.</p>
               </div>
+<<<<<<< HEAD
               <div className="text-center p-6 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-300">
                 <div className="relative pb-[100%] mb-4 rounded-xl overflow-hidden">
                   <img src="/images/gengivoplastia.jpeg" 
                     alt="Gengivoplastia" 
                     className="absolute inset-0 w-full h-full object-contain" 
+=======
+              <div className="text-center p-6 bg-white rounded-lg shadow-soft hover:shadow-medium transition-all duration-300">
+                <div className="relative pb-[75%] mb-4">
+                  <img src="/images/gengivoplastia.jpeg" 
+                    alt="Gengivoplastia" 
+                    className="absolute inset-0 w-full h-full rounded-lg object-contain bg-gray-50" 
+>>>>>>> 099755caa0e1140baf7a8d01cf5d281b3afa3e7b
                   />
                 </div>
                 <h3 className="text-lg font-display text-primary-400 mb-2">Gengivoplastia</h3>
                 <p className="text-sm font-sans text-primary-300">Recupere a harmonia do seu sorriso, corrigimos o contorno da gengiva e realçamos a estética dental de forma rápida e eficaz.</p>
               </div>
+<<<<<<< HEAD
               <div className="text-center p-6 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-300">
                 <div className="relative pb-[100%] mb-4 rounded-xl overflow-hidden">
                   <img src="/images/limpeza.jpeg" 
                     alt="Limpeza Dental" 
                     className="absolute inset-0 w-full h-full object-contain" 
+=======
+              <div className="text-center p-6 bg-white rounded-lg shadow-soft hover:shadow-medium transition-all duration-300">
+                <div className="relative pb-[75%] mb-4">
+                  <img src="/images/limpeza.jpeg" 
+                    alt="Limpeza Dental" 
+                    className="absolute inset-0 w-full h-full rounded-lg object-contain bg-gray-50" 
+>>>>>>> 099755caa0e1140baf7a8d01cf5d281b3afa3e7b
                   />
                 </div>
                 <h3 className="text-lg font-display text-primary-400 mb-2">Limpeza Dental</h3>
                 <p className="text-sm font-sans text-primary-300">Mantenha seu sorriso saudável e radiante, removemos a placa, tártaro de forma rápida e indolor e evite problemas bucais.</p>
               </div>
+<<<<<<< HEAD
               <div className="text-center p-6 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-300">
                 <div className="relative pb-[100%] mb-4 rounded-xl overflow-hidden">
                   <img src="/images/restauração.jpeg" 
                     alt="Restaurações Dentais" 
                     className="absolute inset-0 w-full h-full object-contain" 
+=======
+              <div className="text-center p-6 bg-white rounded-lg shadow-soft hover:shadow-medium transition-all duration-300">
+                <div className="relative pb-[75%] mb-4">
+                  <img src="/images/restauração.jpeg" 
+                    alt="Restaurações Dentais" 
+                    className="absolute inset-0 w-full h-full rounded-lg object-contain bg-gray-50" 
+>>>>>>> 099755caa0e1140baf7a8d01cf5d281b3afa3e7b
                   />
                 </div>
                 <h3 className="text-lg font-display text-primary-400 mb-2">Restaurações Dentais</h3>
