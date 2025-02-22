@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import './index.css';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const services = [
     {
@@ -43,6 +45,22 @@ const App = () => {
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
+  };
+
+  const playVideo = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        videoRef.current.play();
+        setIsPlaying(true);
+      }
+    }
+  };
+
+  const handleVideoEnd = () => {
+    setIsPlaying(false);
   };
 
   return (
@@ -123,7 +141,7 @@ const App = () => {
                 Excelência em<br />Odontologia Estética
               </h1>
               <div className="flex items-center space-x-4 mb-8">
-                <img src="/images/header.jpg" alt="Doutor" className="w-12 h-12 rounded-full object-cover border-2 border-primary-100" />
+                <img src="./public/images/header.jpeg" alt="Doutor" className="w-12 h-12 rounded-full object-cover border-2 border-primary-100" />
                 <div className="text-left">
                   <p className="text-sm font-sans text-primary-300">Thainá Firmino, uma profissional destacada com formação em odontologia pela Unifametro.</p>
                 </div>
@@ -137,7 +155,7 @@ const App = () => {
               </div>
             </div>
             <div className="relative">
-              <img src="/images/header.jpg" alt="Doutor" className="w-full h-[600px] object-cover rounded-lg shadow-xl" />
+              <img src="./public/images/header.jpeg" alt="Doutor" className="w-full h-[600px] object-cover rounded-lg shadow-xl" />
             </div>
           </div>
         </div>
@@ -151,8 +169,11 @@ const App = () => {
               Nosso espaço de atendimento
             </h2>
             <div className="aspect-w-16 aspect-h-9 bg-white rounded-lg overflow-hidden">
-              <img src="/images/consultorio-video.jpg" alt="Vídeo do consultório" className="w-full h-full object-cover" />
-              <div className="w-full h-full flex items-center justify-center absolute inset-0 bg-primary-400 bg-opacity-30">
+              <video ref={videoRef} className="w-full h-full object-cover" controls onEnded={handleVideoEnd} onPause={handleVideoEnd}>
+                <source src="/images/consultorio.mp4" type="video/mp4" />
+                Seu navegador não suporta o elemento de vídeo.
+              </video>
+              <div className={`w-full h-full flex items-center justify-center absolute inset-0 bg-primary-400 bg-opacity-30 ${isPlaying ? 'hidden' : 'block'}`} onClick={playVideo}>
                 <div className="play-button">
                   <div className="w-0 h-0 border-t-8 border-b-8 border-l-12 border-transparent border-l-white ml-1"></div>
                 </div>
@@ -265,17 +286,29 @@ const App = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-semibold text-primary-400 mb-12 text-center">
-              Veja alguns resultados!
+              Graduações e Especializações
             </h2>
-            <div className="grid grid-cols-3 gap-4">
-              <img src="/images/resultado-1.jpg" alt="Resultado 1" className="w-full h-64 rounded-lg opacity-50 object-cover" />
-              <img src="/images/resultado-2.jpg" alt="Resultado 2" className="w-full h-64 rounded-lg object-cover" />
-              <img src="/images/resultado-3.jpg" alt="Resultado 3" className="w-full h-64 rounded-lg opacity-50 object-cover" />
-            </div>
-            <div className="flex justify-center mt-8 space-x-2">
-              <button className="w-2 h-2 rounded-full bg-primary-100"></button>
-              <button className="w-2 h-2 rounded-full bg-primary-300"></button>
-              <button className="w-2 h-2 rounded-full bg-primary-100"></button>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+              <div className="text-center transition-transform transform hover:scale-105">
+                <img src="/images/graduacao1.jpg" alt="Graduação 1" className="w-full h-40 rounded-lg object-cover" />
+                <p className="text-sm text-primary-300 mt-2">Odontologia</p>
+              </div>
+              <div className="text-center transition-transform transform hover:scale-105">
+                <img src="/images/graduacao2.jpg" alt="Graduação 2" className="w-full h-40 rounded-lg object-cover" />
+                <p className="text-sm text-primary-300 mt-2">Ortodontia</p>
+              </div>
+              <div className="text-center transition-transform transform hover:scale-105">
+                <img src="/images/graduacao3.jpg" alt="Graduação 3" className="w-full h-40 rounded-lg object-cover" />
+                <p className="text-sm text-primary-300 mt-2">Implantes Dentários</p>
+              </div>
+              <div className="text-center transition-transform transform hover:scale-105">
+                <img src="/images/graduacao4.jpg" alt="Graduação 4" className="w-full h-40 rounded-lg object-cover" />
+                <p className="text-sm text-primary-300 mt-2">Estética Dental</p>
+              </div>
+              <div className="text-center transition-transform transform hover:scale-105">
+                <img src="/images/graduacao5.jpg" alt="Graduação 5" className="w-full h-40 rounded-lg object-cover" />
+                <p className="text-sm text-primary-300 mt-2">Gengivoplastia</p>
+              </div>
             </div>
           </div>
         </div>
