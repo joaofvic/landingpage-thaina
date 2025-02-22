@@ -161,7 +161,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* Video Section */}
+      {/* Video Sectionnn */}
       <section className="py-16 bg-primary-50">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
