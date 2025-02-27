@@ -9,27 +9,27 @@ const App = () => {
 
   const services = [
     {
-      image: "/images/clareamento.jpeg",
+      image: "./dist/assets/images/clareamento.jpeg",
       title: "Clareamento Dental",
       description: "Sorria com segurança, o clareamento dental transforma o seu sorriso, deixando seus dentes mais brancos e radiantes."
     },
     {
-      image: "/images/ortodontia.jpeg",
+      image: "./dist/assets/images/ortodontia.jpeg",
       title: "Ortodontia",
       description: "Transforme seu sorriso com o aparelho dental, melhoramos a estética e a sua saúde bucal de forma eficaz."
     },
     {
-      image: "/images/gengivoplastia.jpeg",
+      image: "./dist/assets/images/gengivoplastia.jpeg",
       title: "Gengivoplastia",
       description: "Recupere a harmonia do seu sorriso, corrigimos o contorno da gengiva e realçamos a estética dental de forma rápida e eficaz."
     },
     {
-      image: "/images/limpeza.jpeg",
+      image: "./dist/assets/images/limpeza.jpeg",
       title: "Limpeza Dental",
       description: "Mantenha seu sorriso saudável e radiante, removemos a placa, tártaro de forma rápida e indolor e evite problemas bucais."
     },
     {
-      image: "/images/restauração.jpeg",
+      image: "./dist/assets/images/restauração.jpeg",
       title: "Restaurações Dentais",
       description: "Recupere a funcionalidade e estética do seu sorriso com restaurações dentais de alta qualidade e tecnologia avançada."
     }
@@ -128,7 +128,7 @@ const App = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-8">
               <a href="#" className="flex items-center">
-                <img src="/images/logo.png" alt="DentCare Logo" className="h-12 w-auto" />
+                <img src="./dist/assets/images/logo.png" alt="DentCare Logo" className="h-12 w-auto" />
               </a>
               <div className="hidden md:flex space-x-6">
                 <a href="#inicio" className="nav-link">Início</a>
@@ -185,7 +185,7 @@ const App = () => {
             </div>
             <div className="relative">
               <img 
-                src="/images/header.jpeg" 
+                src="./dist/assets/images/header.jpeg" 
                 alt="Dentista" 
                 className="w-full h-[600px] object-cover rounded-lg shadow-xl"
               />
@@ -456,7 +456,7 @@ const App = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
             <div className="flex flex-col sm:flex-row items-center sm:items-start md:items-center gap-6 md:gap-8">
               <div className="w-16 h-16 bg-primary-400 rounded-full flex items-center justify-center shrink-0">
-                <img src="/images/simbolo.png" alt="Símbolo" className="w-10 h-10 object-contain" />
+                <img src="./dist/assets/images/simbolo.png" alt="Símbolo" className="w-10 h-10 object-contain" />
               </div>
               <div className="text-center sm:text-left">
                 <h3 className="text-lg font-medium text-primary-400">Dra. Thainá Firmino</h3>
@@ -516,7 +516,7 @@ const App = () => {
 
           <div className="mt-10 md:mt-12 pt-8 border-t border-primary-100/50">
             <p className="text-center text-sm text-primary-300">
-              Copyright © {new Date().getFullYear()} DentCare. Todos os direitos reservados
+              Copyright © {new Date().getFullYear()} Thainá Firmino. Todos os direitos reservados
             </p>
           </div>
         </div>
