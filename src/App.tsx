@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { GraduationCap, Book, Award, Stethoscope, Microscope, ChevronLeft, ChevronRight, MapPin, Phone, MessageSquare, Instagram, Facebook, Linkedin } from 'lucide-react';
 import './index.css';
-
+//simbolo
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
