@@ -1,7 +1,17 @@
 import { useState, useEffect } from 'react';
 import { GraduationCap, Book, Award, Stethoscope, Microscope, ChevronLeft, ChevronRight, MapPin, Phone, MessageSquare, Instagram, Facebook, Linkedin } from 'lucide-react';
 import './index.css';
-//simbol
+
+// Importando as imagens
+import logo from './assets/images/logo.png';
+import simbolo from './assets/images/simbolo.png';
+import header from './assets/images/header.jpeg';
+import clareamento from './assets/images/clareamento.jpeg';
+import ortodontia from './assets/images/ortodontia.jpeg';
+import gengivoplastia from './assets/images/gengivoplastia.jpeg';
+import limpeza from './assets/images/limpeza.jpeg';
+import restauracao from './assets/images/restauração.jpeg';
+
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -9,27 +19,27 @@ const App = () => {
 
   const services = [
     {
-      image: "./dist/assets/images/clareamento.jpeg",
+      image: clareamento,
       title: "Clareamento Dental",
       description: "Sorria com segurança, o clareamento dental transforma o seu sorriso, deixando seus dentes mais brancos e radiantes."
     },
     {
-      image: "./dist/assets/images/ortodontia.jpeg",
+      image: ortodontia,
       title: "Ortodontia",
       description: "Transforme seu sorriso com o aparelho dental, melhoramos a estética e a sua saúde bucal de forma eficaz."
     },
     {
-      image: "./dist/assets/images/gengivoplastia.jpeg",
+      image: gengivoplastia,
       title: "Gengivoplastia",
       description: "Recupere a harmonia do seu sorriso, corrigimos o contorno da gengiva e realçamos a estética dental de forma rápida e eficaz."
     },
     {
-      image: "./dist/assets/images/limpeza.jpeg",
+      image: limpeza,
       title: "Limpeza Dental",
       description: "Mantenha seu sorriso saudável e radiante, removemos a placa, tártaro de forma rápida e indolor e evite problemas bucais."
     },
     {
-      image: "./dist/assets/images/restauração.jpeg",
+      image: restauracao,
       title: "Restaurações Dentais",
       description: "Recupere a funcionalidade e estética do seu sorriso com restaurações dentais de alta qualidade e tecnologia avançada."
     }
@@ -128,7 +138,7 @@ const App = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-8">
               <a href="#" className="flex items-center">
-                <img src="./dist/assets/images/logo.png" alt="DentCare Logo" className="h-12 w-auto" />
+                <img src={logo} alt="DentCare Logo" className="h-12 w-auto" />
               </a>
               <div className="hidden md:flex space-x-6">
                 <a href="#inicio" className="nav-link">Início</a>
@@ -185,7 +195,7 @@ const App = () => {
             </div>
             <div className="relative">
               <img 
-                src="./dist/assets/images/header.jpeg" 
+                src={header}
                 alt="Dentista" 
                 className="w-full h-[600px] object-cover rounded-lg shadow-xl"
               />
@@ -456,7 +466,7 @@ const App = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
             <div className="flex flex-col sm:flex-row items-center sm:items-start md:items-center gap-6 md:gap-8">
               <div className="w-16 h-16 bg-primary-400 rounded-full flex items-center justify-center shrink-0">
-                <img src="./dist/assets/images/simbolo.png" alt="Símbolo" className="w-10 h-10 object-contain" />
+                <img src={simbolo} alt="Símbolo" className="w-10 h-10 object-contain" />
               </div>
               <div className="text-center sm:text-left">
                 <h3 className="text-lg font-medium text-primary-400">Dra. Thainá Firmino</h3>
