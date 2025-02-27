@@ -1,261 +1,449 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
+import { GraduationCap, Book, Award, Stethoscope, Microscope, ChevronLeft, ChevronRight, MapPin, Phone, MessageSquare, Instagram, Facebook, Linkedin } from 'lucide-react';
 import './index.css';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const services = [
     {
-      image: "/images/clareamento.jpeg",
+      image: "./dist/assets/images/clareamento.jpeg",
       title: "Clareamento Dental",
       description: "Sorria com segurança, o clareamento dental transforma o seu sorriso, deixando seus dentes mais brancos e radiantes."
     },
     {
-      image: "/images/ortodontia.jpeg",
+      image: "./dist/assets/images/ortodontia.jpeg",
       title: "Ortodontia",
       description: "Transforme seu sorriso com o aparelho dental, melhoramos a estética e a sua saúde bucal de forma eficaz."
     },
     {
-      image: "/images/gengivoplastia.jpeg",
+      image: "./dist/assets/images/gengivoplastia.jpeg",
       title: "Gengivoplastia",
       description: "Recupere a harmonia do seu sorriso, corrigimos o contorno da gengiva e realçamos a estética dental de forma rápida e eficaz."
     },
     {
-      image: "/images/limpeza.jpeg",
+      image: "./dist/assets/images/limpeza.jpeg",
       title: "Limpeza Dental",
       description: "Mantenha seu sorriso saudável e radiante, removemos a placa, tártaro de forma rápida e indolor e evite problemas bucais."
     },
     {
-      image: "/images/restauração.jpeg",
+      image: "./dist/assets/images/restauração.jpeg",
       title: "Restaurações Dentais",
-      description: "Recupere a funcionalidade e estética do seu sorriso, solução eficaz para dentes danificados, deixando seu sorriso bonito e saudável."
+      description: "Recupere a funcionalidade e estética do seu sorriso com restaurações dentais de alta qualidade e tecnologia avançada."
+    }
+  ];
+
+  const education = [
+    {
+      period: "2013 a 2018",
+      title: "Graduação em Odontologia",
+      type: "graduation",
+      icon: GraduationCap,
+      color: "bg-primary-100"
+    },
+    {
+      period: "2018 a 2021",
+      title: "Pós graduação em Endodontia (Canal)",
+      type: "post-graduation",
+      icon: Book,
+      color: "bg-primary-200"
+    },
+    {
+      period: "2021 a 2022",
+      title: "Aperfeiçoamento em Cirurgia Oral Menor",
+      type: "specialization",
+      icon: Stethoscope,
+      color: "bg-primary-300"
+    },
+    {
+      period: "2024 a 2025",
+      title: "Aperfeiçoamento em Estética Dental e Periodontia",
+      type: "specialization",
+      icon: Award,
+      color: "bg-primary-200"
+    },
+    {
+      period: "2023 a 2026",
+      title: "Especializando Ortodontia",
+      type: "ongoing",
+      icon: Microscope,
+      color: "bg-primary-100"
     }
   ];
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % services.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + services.length) % services.length);
-  };
-
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
-  };
-
-  const playVideo = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        videoRef.current.play();
-        setIsPlaying(true);
-      }
+    if (!isTransitioning) {
+      setIsTransitioning(true);
+      setCurrentSlide((prev) => (prev + 1) % services.length);
     }
   };
 
-  const handleVideoEnd = () => {
-    setIsPlaying(false);
+  const prevSlide = () => {
+    if (!isTransitioning) {
+      setIsTransitioning(true);
+      setCurrentSlide((prev) => (prev - 1 + services.length) % services.length);
+    }
+  };
+
+  const goToSlide = (index: number) => {
+    if (!isTransitioning && index !== currentSlide) {
+      setIsTransitioning(true);
+      setCurrentSlide(index);
+    }
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsTransitioning(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [currentSlide]);
+
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 75) {
+      nextSlide();
+    }
+    if (touchStart - touchEnd < -75) {
+      prevSlide();
+    }
   };
 
   return (
     <div className="min-h-screen bg-primary-50">
-      {/* Header/Navbar */}
       <nav className="fixed top-0 left-0 right-0 bg-white z-50 py-4 border-b border-primary-100">
         <div className="container mx-auto px-6">
-          <div className="flex flex-col items-center justify-center md:flex-row md:justify-between">
-            {/* Menu Mobile Button - Left */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-8">
+              <a href="#" className="flex items-center">
+                <img src="./dist/assets/images/logo.png" alt="DentCare Logo" className="h-12 w-auto" />
+              </a>
+              <div className="hidden md:flex space-x-6">
+                <a href="#inicio" className="nav-link">Início</a>
+                <a href="#tratamentos" className="nav-link">Tratamentos</a>
+                <a href="#servicos" className="nav-link">Serviços</a>
+                <a href="#resultados" className="nav-link">Resultados</a>
+                <a href="#historias" className="nav-link">Histórias</a>
+              </div>
+            </div>
             <button 
-              className="md:hidden absolute left-6 top-1/2 -translate-y-1/2 p-2 rounded-lg hover:bg-primary-50"
+              className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              <svg 
-                className="w-5 h-5 text-primary-400" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                {isMenuOpen ? (
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
-
-            {/* Logo - Centered */}
-            <div className="flex-shrink-0 mb-2 md:mb-0">
-              <img 
-                src="/images/logo.png" 
-                alt="Logo" 
-                className="h-16 md:h-20 lg:h-24 w-auto object-contain max-w-none" 
-              />
+          </div>
+          {isMenuOpen && (
+            <div className="md:hidden mt-4">
+              <div className="flex flex-col space-y-2">
+                <a href="#inicio" className="nav-link">Início</a>
+                <a href="#tratamentos" className="nav-link">Tratamentos</a>
+                <a href="#servicos" className="nav-link">Serviços</a>
+                <a href="#resultados" className="nav-link">Resultados</a>
+                <a href="#historias" className="nav-link">Histórias</a>
+              </div>
             </div>
-            
-            {/* Menu Desktop */}
-            <ul className="hidden md:flex items-center space-x-8">
-              <li><a href="#inicio" className="nav-link font-medium">Início</a></li>
-              <li><a href="#tratamentos" className="nav-link font-medium">Tratamentos</a></li>
-              <li><a href="#servicos" className="nav-link font-medium">Serviços</a></li>
-              <li><a href="#resultados" className="nav-link font-medium">Resultados</a></li>
-              <li><a href="#historias" className="nav-link font-medium">Histórias</a></li>
-              <li><a href="#contato" className="nav-link font-medium">Contato</a></li>
-            </ul>
-          </div>
-
-          {/* Menu Mobile */}
-          <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'} pt-2`}>
-            <ul className="flex flex-col space-y-2">
-              <li><a href="#inicio" className="nav-link block py-2 font-medium text-center">Início</a></li>
-              <li><a href="#tratamentos" className="nav-link block py-2 font-medium text-center">Tratamentos</a></li>
-              <li><a href="#servicos" className="nav-link block py-2 font-medium text-center">Serviços</a></li>
-              <li><a href="#resultados" className="nav-link block py-2 font-medium text-center">Resultados</a></li>
-              <li><a href="#historias" className="nav-link block py-2 font-medium text-center">Histórias</a></li>
-              <li><a href="#contato" className="nav-link block py-2 font-medium text-center">Contato</a></li>
-            </ul>
-          </div>
+          )}
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-white relative">
+      <section className="pt-32 pb-16">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="text-left">
+            <div>
               <h1 className="text-5xl font-display text-primary-400 mb-6">
                 Excelência em<br />Odontologia Estética
               </h1>
-              <div className="flex items-center space-x-4 mb-8">
-                <img src="./public/images/header.jpeg" alt="Doutor" className="w-12 h-12 rounded-full object-cover border-2 border-primary-100" />
-                <div className="text-left">
-                  <p className="text-sm font-sans text-primary-300">Thainá Firmino, uma profissional destacada com formação em odontologia pela Unifametro.</p>
-                </div>
-              </div>
+              <p className="text-primary-300 mb-8 max-w-lg">
+              Thainá Firmino, uma profissional destacada com formação em odontologia pela Unifametro.
+              </p>
               <button className="button-primary">
-                AGENDE SEU HORÁRIO
+                AGENDE SUA CONSULTA
               </button>
               <div className="mt-8">
-                <p className="text-sm font-sans text-primary-300 mb-2">Reconhecido por</p>
-                <img src="/images/logo.jpg" alt="Forbes" className="h-8 opacity-70" />
+                <p className="text-sm text-primary-300 mb-2">Reconhecido por</p>
+                <img 
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Forbes_logo.svg/250px-Forbes_logo.svg.png" 
+                  alt="Forbes" 
+                  className="h-8 opacity-70"
+                />
               </div>
             </div>
             <div className="relative">
-              <img src="./public/images/header.jpeg" alt="Doutor" className="w-full h-[600px] object-cover rounded-lg shadow-xl" />
+              <img 
+                src="./dist/assets/images/header.jpeg" 
+                alt="Dentista" 
+                className="w-full h-[600px] object-cover rounded-lg shadow-xl"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Video Sectionnn */}
-      <section className="py-16 bg-primary-50">
-        <div className="container mx-auto px-6">
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-xl text-primary-400 mb-6">
-              Nosso espaço de atendimento
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-center mb-8 md:mb-16">
+              Formação e<br />
+              <span className="text-primary-400">Especializações</span>
             </h2>
-            <div className="aspect-w-16 aspect-h-9 bg-white rounded-lg overflow-hidden">
-              <video ref={videoRef} className="w-full h-full object-cover" controls onEnded={handleVideoEnd} onPause={handleVideoEnd}>
-                <source src="/images/consultorio.mp4" type="video/mp4" />
-                Seu navegador não suporta o elemento de vídeo.
-              </video>
-              <div className={`w-full h-full flex items-center justify-center absolute inset-0 bg-primary-400 bg-opacity-30 ${isPlaying ? 'hidden' : 'block'}`} onClick={playVideo}>
-                <div className="play-button">
-                  <div className="w-0 h-0 border-t-8 border-b-8 border-l-12 border-transparent border-l-white ml-1"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Transformação Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-              Como podemos transformar<br />
-              <span className="text-primary-400 bg-gradient-to-r from-primary-300 to-primary-400 bg-clip-text text-transparent">seu sorriso e sua vida?</span>
-            </h2>
-            <div className="relative max-w-5xl mx-auto overflow-hidden">
-              <div className="relative px-4 md:px-12">
-                <div className="overflow-hidden">
+            
+            <div className="relative">
+              <div className="absolute left-8 sm:left-[50%] top-0 bottom-0 w-px bg-gradient-to-b from-primary-100 via-primary-300 to-primary-100"></div>
+              
+              {education.map((item, index) => {
+                const Icon = item.icon;
+                return (
                   <div 
-                    className="flex transition-all duration-700 ease-in-out"
-                    style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                    key={index}
+                    className={`relative flex flex-col sm:flex-row items-start mb-8 sm:mb-12 group ${
+                      index % 2 === 0 ? 'sm:flex-row' : 'sm:flex-row-reverse'
+                    }`}
                   >
-                    {services.map((service, index) => (
-                      <div 
-                        key={index}
-                        className="w-full flex-shrink-0 px-3 md:px-4"
-                      >
-                        <div className={`transform transition-all duration-500 ${
-                          currentSlide === index 
-                            ? 'scale-100 opacity-100 translate-y-0' 
-                            : 'scale-90 opacity-40 blur-sm translate-y-4'
-                        }`}>
-                          <div className="text-center p-8 bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.18)] transition-all duration-500">
-                            <div className="relative pb-[85%] mb-6 rounded-[1.5rem] overflow-hidden group">
-                              <img 
-                                src={service.image}
-                                alt={service.title}
-                                className="absolute inset-0 w-full h-full object-cover rounded-[1.5rem] transition-transform duration-500 group-hover:scale-105"
-                              />
+                    <div className={`pl-20 sm:pl-0 w-full sm:w-[calc(50%-2rem)] ${
+                      index % 2 === 0 ? 'sm:pr-8' : 'sm:pl-8'
+                    }`}>
+                      <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-all duration-500 transform hover:-translate-y-1 border border-primary-100/30">
+                        <div className="flex items-start gap-4">
+                          <div className={`p-3 rounded-xl ${item.color} bg-opacity-20`}>
+                            <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary-400" />
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-2 mb-2 flex-wrap">
+                              <span className="text-sm font-medium text-primary-300">{item.period}</span>
+                              {item.type === 'ongoing' && (
+                                <span className="px-2 py-1 text-xs font-medium bg-primary-100/50 text-primary-400 rounded-full">
+                                  Em andamento
+                                </span>
+                              )}
                             </div>
-                            <h3 className="text-xl font-bold text-primary-400 mb-3">{service.title}</h3>
-                            <p className="text-base leading-relaxed text-primary-300 max-w-md mx-auto">{service.description}</p>
+                            <h3 className="text-base sm:text-lg md:text-xl font-bold text-primary-400 leading-tight">{item.title}</h3>
                           </div>
                         </div>
                       </div>
-                    ))}
+                    </div>
+
+                    <div className="absolute left-8 sm:left-1/2 top-8 sm:top-1/2 transform -translate-x-1/2 sm:-translate-y-1/2">
+                      <div className="w-4 h-4 bg-primary-300 rounded-full border-4 border-white shadow-md group-hover:scale-125 transition-transform duration-300"></div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        <div className="absolute top-0 left-0 w-64 h-64 bg-primary-100 rounded-full filter blur-3xl opacity-20 -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-200 rounded-full filter blur-3xl opacity-10 translate-x-1/2 translate-y-1/2"></div>
+      </section>
+
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            Como podemos transformar
+          </h2>
+          <h3 className="text-2xl md:text-3xl font-display text-primary-400 text-center mb-16">
+            seu sorriso e sua vida?
+          </h3>
+          
+          <div className="relative max-w-6xl mx-auto">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary-50/20 via-transparent to-primary-50/20 rounded-3xl -mx-8 -my-4"></div>
+            
+            <div 
+              className="relative overflow-hidden rounded-2xl"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
+              <div 
+                className="flex transition-transform duration-500 ease-out"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              >
+                {services.map((service, index) => (
+                  <div 
+                    key={index} 
+                    className="w-full flex-shrink-0 px-4"
+                  >
+                    <div className={`
+                      service-card p-6 md:p-8 
+                      transform transition-all duration-500 
+                      ${currentSlide === index ? 'scale-100 opacity-100' : 'scale-95 opacity-70'}
+                    `}>
+                      <div className="relative overflow-hidden rounded-xl mb-6 group">
+                        <img 
+                          src={service.image}
+                          alt={service.title}
+                          className="w-full h-[300px] md:h-[400px] object-cover transform transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      </div>
+                      <h3 className="text-2xl font-bold mb-4 text-primary-400">{service.title}</h3>
+                      <p className="text-primary-300 leading-relaxed">{service.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <button 
+                onClick={prevSlide}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={isTransitioning}
+              >
+                <ChevronLeft className="w-6 h-6 text-primary-400" />
+              </button>
+              <button 
+                onClick={nextSlide}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={isTransitioning}
+              >
+                <ChevronRight className="w-6 h-6 text-primary-400" />
+              </button>
+            </div>
+
+            <div className="flex justify-center mt-8 space-x-3">
+              {services.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`
+                    transition-all duration-300 relative
+                    ${currentSlide === index ? 'w-8' : 'w-3'} 
+                    h-3 rounded-full
+                    ${currentSlide === index ? 'bg-primary-400' : 'bg-primary-200'}
+                  `}
+                >
+                  <span className="absolute inset-0 rounded-full bg-primary-400/20 animate-ping"></span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-64 h-64 bg-primary-100 rounded-full filter blur-3xl opacity-20 -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-200 rounded-full filter blur-3xl opacity-10 translate-x-1/2 translate-y-1/2"></div>
+        
+        <div className="container mx-auto px-6 relative">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-display mb-6">
+                Nosso Espaço de<br />
+                <span className="text-primary-400">Atendimento</span>
+              </h2>
+              <p className="text-primary-300 text-lg max-w-2xl mx-auto">
+                Conheça nossa clínica, um ambiente moderno e acolhedor projetado para 
+                proporcionar o máximo conforto durante seu tratamento.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="video-container">
+                <iframe 
+                  src="https://www.youtube-nocookie.com/embed/oQsX2fd6AWM"
+                  title="Tour Virtual da Clínica"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+
+              <div className="space-y-8">
+                <div className="space-y-6">
+                  <h3 className="text-2xl font-display text-primary-400">
+                    Estrutura Moderna e Completa
+                  </h3>
+                  <p className="text-primary-300 leading-relaxed">
+                    Nossa clínica foi planejada para oferecer o máximo em conforto e tecnologia. 
+                    Equipada com aparelhos de última geração e seguindo rigorosos protocolos de 
+                    biossegurança, garantimos um atendimento de excelência em um ambiente acolhedor.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="bg-primary-50 p-6 rounded-xl">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <div className="p-3 rounded-lg bg-primary-100">
+                        <Stethoscope className="w-6 h-6 text-primary-400" />
+                      </div>
+                      <h4 className="font-bold text-primary-400">Tecnologia</h4>
+                    </div>
+                    <p className="text-primary-300">
+                      Equipamentos modernos para diagnósticos precisos e tratamentos eficientes
+                    </p>
+                  </div>
+
+                  <div className="bg-primary-50 p-6 rounded-xl">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <div className="p-3 rounded-lg bg-primary-100">
+                        <Award className="w-6 h-6 text-primary-400" />
+                      </div>
+                      <h4 className="font-bold text-primary-400">Conforto</h4>
+                    </div>
+                    <p className="text-primary-300">
+                      Ambiente climatizado e acolhedor para sua melhor experiência
+                    </p>
                   </div>
                 </div>
 
-                {/* Botões de navegação */}
-                <button 
-                  onClick={prevSlide}
-                  className="absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 bg-white p-4 rounded-full shadow-[0_4px_20px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_25px_rgb(0,0,0,0.18)] hover:bg-primary-50 transition-all duration-300 z-20 group"
-                >
-                  <svg className="w-8 h-8 text-primary-400 group-hover:text-primary-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-                  </svg>
+                <button className="button-primary w-full md:w-auto">
+                  AGENDE SUA VISITA
                 </button>
-                <button 
-                  onClick={nextSlide}
-                  className="absolute -right-2 md:-right-6 top-1/2 -translate-y-1/2 bg-white p-4 rounded-full shadow-[0_4px_20px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_25px_rgb(0,0,0,0.18)] hover:bg-primary-50 transition-all duration-300 z-20 group"
-                >
-                  <svg className="w-8 h-8 text-primary-400 group-hover:text-primary-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                {/* Indicadores de slide */}
-                <div className="flex justify-center mt-12 space-x-3">
-                  {services.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => goToSlide(index)}
-                      className={`transition-all duration-500 rounded-full ${
-                        currentSlide === index 
-                          ? 'w-12 h-3 bg-primary-400' 
-                          : 'w-3 h-3 bg-primary-200 hover:bg-primary-300'
-                      }`}
-                    />
-                  ))}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="container mx-auto px-6">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-display mb-6">
+                Nossa<br />
+                <span className="text-primary-400">Localização</span>
+              </h2>
+              <p className="text-primary-300 text-lg max-w-2xl mx-auto">
+                Venha nos visitar! Estamos em um local de fácil acesso.
+              </p>
+            </div>
+
+            <div className="rounded-2xl overflow-hidden shadow-lg">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.0901255883656!2d-38.46022392414567!3d-7.236435992770771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7a1832c5a0c3841%3A0x7c3c29d0b6048f47!2sR.%20S%C3%A3o%20Judas%20Tadeu%2C%20125%20-%20Pereiro%2C%20CE%2C%2063460-000!5e0!3m2!1spt-BR!2sbr!4v1709899894949!5m2!1spt-BR!2sbr"
+                width="100%"
+                height="450"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+
+            <div className="mt-8 p-6 bg-primary-50 rounded-xl">
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-lg bg-primary-100">
+                  <MapPin className="w-6 h-6 text-primary-400" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-primary-400 mb-2">Endereço</h3>
+                  <p className="text-primary-300">
+                    R. São Judas Tadeu, 125 - Pereiro, CE, 63460-000
+                  </p>
                 </div>
               </div>
             </div>
@@ -263,130 +451,73 @@ const App = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-primary-50">
+      <footer className="bg-white py-12 md:py-16 border-t border-primary-100">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl font-semibold text-primary-400 mb-8">
-              Quer ter um sorriso perfeito e uma<br />aparência harmoniosa?
-            </h2>
-            <div className="grid grid-cols-2 gap-8 mb-8">
-              <img src="/images/antes-1.jpg" alt="Antes" className="w-full h-80 rounded-lg object-cover shadow-lg" />
-              <img src="/images/depois-1.jpg" alt="Depois" className="w-full h-80 rounded-lg object-cover shadow-lg" />
-            </div>
-            <button className="bg-primary-300 text-white px-8 py-3 rounded-lg hover:bg-primary-400 transition-all duration-300 transform hover:scale-105">
-              Agende uma avaliação
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Resultados Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-semibold text-primary-400 mb-12 text-center">
-              Graduações e Especializações
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-              <div className="text-center transition-transform transform hover:scale-105">
-                <img src="/images/graduacao1.jpg" alt="Graduação 1" className="w-full h-40 rounded-lg object-cover" />
-                <p className="text-sm text-primary-300 mt-2">Odontologia</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start md:items-center gap-6 md:gap-8">
+              <div className="w-16 h-16 bg-primary-400 rounded-full flex items-center justify-center shrink-0">
+                <img src="./dist/assets/images/simbolo.png" alt="Símbolo" className="w-10 h-10 object-contain" />
               </div>
-              <div className="text-center transition-transform transform hover:scale-105">
-                <img src="/images/graduacao2.jpg" alt="Graduação 2" className="w-full h-40 rounded-lg object-cover" />
-                <p className="text-sm text-primary-300 mt-2">Ortodontia</p>
-              </div>
-              <div className="text-center transition-transform transform hover:scale-105">
-                <img src="/images/graduacao3.jpg" alt="Graduação 3" className="w-full h-40 rounded-lg object-cover" />
-                <p className="text-sm text-primary-300 mt-2">Implantes Dentários</p>
-              </div>
-              <div className="text-center transition-transform transform hover:scale-105">
-                <img src="/images/graduacao4.jpg" alt="Graduação 4" className="w-full h-40 rounded-lg object-cover" />
-                <p className="text-sm text-primary-300 mt-2">Estética Dental</p>
-              </div>
-              <div className="text-center transition-transform transform hover:scale-105">
-                <img src="/images/graduacao5.jpg" alt="Graduação 5" className="w-full h-40 rounded-lg object-cover" />
-                <p className="text-sm text-primary-300 mt-2">Gengivoplastia</p>
+              <div className="text-center sm:text-left">
+                <h3 className="text-lg font-medium text-primary-400">Dra. Thainá Firmino</h3>
+                <p className="text-primary-300 text-sm">CRO CE 10338</p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Consultório Section */}
-      <section className="py-16 bg-primary-50">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-semibold text-primary-400 mb-6">
-              Nosso Consultório
-            </h2>
-            <p className="text-primary-300 mb-8 max-w-2xl">
-            Nosso consultório oferece um atendimento odontológico humanizado, com profissionais altamente capacitados e sempre atualizados com as últimas inovações da área. Contamos com tecnologia de ponta para proporcionar o melhor cuidado para o seu sorriso, em um ambiente moderno e acolhedor. Venha nos visitar e experimente o cuidado diferenciado que você merece!
-            </p>
-            <div className="grid grid-cols-2 gap-4">
-              <img src="/images/consultorio-1.jpg" alt="Consultório" className="w-full h-80 rounded-lg object-cover shadow-lg" />
-              <img src="/images/consultorio-2.jpg" alt="Equipamentos" className="w-full h-80 rounded-lg object-cover shadow-lg" />
-            </div>
-            <button className="mt-8 bg-primary-300 text-white px-8 py-3 rounded-lg hover:bg-primary-400 transition-all duration-300">
-              Conheça nosso espaço
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Depoimentos Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-semibold text-primary-400 mb-12 text-center">
-              Depoimentos
-            </h2>
-            <div className="grid grid-cols-3 gap-8">
-              <div className="text-center">
-                <img src="/images/paciente-1.jpg" alt="Paciente 1" className="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-2 border-primary-100" />
-                <p className="text-sm text-primary-300 mb-4">
-                  "Excelente atendimento! Mudou completamente meu sorriso e minha autoestima."
-                </p>
-                <h4 className="text-sm font-medium text-primary-400">Maria Silva</h4>
-              </div>
-              <div className="text-center">
-                <img src="/images/paciente-2.jpg" alt="Paciente 2" className="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-2 border-primary-100" />
-                <p className="text-sm text-primary-300 mb-4">
-                  "Profissionais altamente qualificados e ambiente super acolhedor."
-                </p>
-                <h4 className="text-sm font-medium text-primary-400">João Santos</h4>
-              </div>
-              <div className="text-center">
-                <img src="/images/paciente-3.jpg" alt="Paciente 3" className="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-2 border-primary-100" />
-                <p className="text-sm text-primary-300 mb-4">
-                  "Resultado incrível com as lentes de contato dental. Super recomendo!"
-                </p>
-                <h4 className="text-sm font-medium text-primary-400">Ana Costa</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Mapa Section */}
-      <section className="h-[400px] bg-primary-50">
-        {/* Mapa será integrado aqui */}
-      </section>
-
-      {/* Footer */}
-      <footer className="py-8 bg-white border-t border-primary-100">
-        <div className="container mx-auto px-6">
-          <div className="flex justify-between items-center">
-            <img src="/images/logo.svg" alt="Logo" className="h-8" />
-            <div className="flex space-x-4">
-              <a href="#" className="text-primary-300 hover:text-primary-400 transition-colors">
-                <span className="sr-only">Instagram</span>
-                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd"></path>
+            <div className="flex justify-center gap-6">
+              <a 
+                href="#" 
+                className="w-12 h-12 md:w-10 md:h-10 rounded-full bg-primary-50 flex items-center justify-center transition-all duration-300 hover:bg-primary-100"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-6 h-6 md:w-5 md:h-5 text-primary-400" />
+              </a>
+              <a 
+                href="https://wa.me/558882235210" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 md:w-10 md:h-10 rounded-full bg-primary-50 flex items-center justify-center transition-all duration-300 hover:bg-primary-100"
+                aria-label="WhatsApp"
+              >
+                <svg 
+                  viewBox="0 0 24 24" 
+                  className="w-6 h-6 md:w-5 md:h-5 text-primary-400"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+                  <path d="M9 10a0.5 .5 0 0 0 1 0V9a0.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a0.5 .5 0 0 0 0 -1h-1a0.5 .5 0 0 0 0 1" />
                 </svg>
               </a>
+              <a 
+                href="#" 
+                className="w-12 h-12 md:w-10 md:h-10 rounded-full bg-primary-50 flex items-center justify-center transition-all duration-300 hover:bg-primary-100"
+                aria-label="Facebook"
+              >
+                <Facebook className="w-6 h-6 md:w-5 md:h-5 text-primary-400" />
+              </a>
             </div>
+
+            <div className="flex flex-col items-center md:items-end gap-2">
+              <a 
+                href="tel:+558899999999" 
+                className="text-lg font-medium text-primary-400 hover:text-primary-300 transition-colors"
+              >
+                +55 88 8223-5210
+              </a>
+              <button className="px-6 py-2 text-primary-300 hover:text-primary-400 transition-colors border border-primary-100 rounded-full hover:bg-primary-50">
+                Agende sua consulta
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-10 md:mt-12 pt-8 border-t border-primary-100/50">
+            <p className="text-center text-sm text-primary-300">
+              Copyright © {new Date().getFullYear()} DentCare. Todos os direitos reservados
+            </p>
           </div>
         </div>
       </footer>
