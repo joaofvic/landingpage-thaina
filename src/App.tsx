@@ -141,11 +141,11 @@ const App = () => {
                 <img src={logo} alt="DentCare Logo" className="h-12 w-auto" />
               </a>
               <div className="hidden md:flex space-x-6">
-                <a href="#inicio" className="nav-link">Início</a>
-                <a href="#tratamentos" className="nav-link">Tratamentos</a>
-                <a href="#servicos" className="nav-link">Serviços</a>
+                <a href="#home" className="nav-link">Início</a>
+                <a href="#especialidades" className="nav-link">Especialidades</a>
                 <a href="#resultados" className="nav-link">Resultados</a>
-                <a href="#historias" className="nav-link">Histórias</a>
+                <a href="#consultorio" className="nav-link">Consultório</a>
+                <a href="#localizacao" className="nav-link">Localização</a>
               </div>
             </div>
             <button 
@@ -160,18 +160,18 @@ const App = () => {
           {isMenuOpen && (
             <div className="md:hidden mt-4">
               <div className="flex flex-col space-y-2">
-                <a href="#inicio" className="nav-link">Início</a>
-                <a href="#tratamentos" className="nav-link">Tratamentos</a>
-                <a href="#servicos" className="nav-link">Serviços</a>
+                <a href="#home" className="nav-link">Início</a>
+                <a href="#especialidades" className="nav-link">Especialidades</a>
                 <a href="#resultados" className="nav-link">Resultados</a>
-                <a href="#historias" className="nav-link">Histórias</a>
+                <a href="#consultorio" className="nav-link">Consultório</a>
+                <a href="#localizacao" className="nav-link">Localização</a>
               </div>
             </div>
           )}
         </div>
       </nav>
 
-      <section className="pt-32 pb-16">
+      <section id="home" className="pt-32 pb-16">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
@@ -181,17 +181,14 @@ const App = () => {
               <p className="text-primary-300 mb-8 max-w-lg">
               Thainá Firmino, uma profissional destacada com formação em odontologia pela Unifametro.
               </p>
-              <button className="button-primary">
+              <a 
+                href="https://wa.me/558882235210"
+                target="_blank"
+                rel="noopener noreferrer" 
+                className="button-primary inline-block text-center"
+              >
                 AGENDE SUA CONSULTA
-              </button>
-              <div className="mt-8">
-                <p className="text-sm text-primary-300 mb-2">Reconhecido por</p>
-                <img 
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Forbes_logo.svg/250px-Forbes_logo.svg.png" 
-                  alt="Forbes" 
-                  className="h-8 opacity-70"
-                />
-              </div>
+              </a>
             </div>
             <div className="relative">
               <img 
@@ -204,7 +201,7 @@ const App = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-white relative overflow-hidden">
+      <section id="especialidades" className="py-20 bg-white relative overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-center mb-8 md:mb-16">
@@ -261,7 +258,7 @@ const App = () => {
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-200 rounded-full filter blur-3xl opacity-10 translate-x-1/2 translate-y-1/2"></div>
       </section>
 
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section id="resultados" className="py-24 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
             Como podemos transformar
@@ -344,7 +341,7 @@ const App = () => {
         </div>
       </section>
 
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section id="consultorio" className="py-24 bg-white relative overflow-hidden">
         <div className="absolute top-0 left-0 w-64 h-64 bg-primary-100 rounded-full filter blur-3xl opacity-20 -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-200 rounded-full filter blur-3xl opacity-10 translate-x-1/2 translate-y-1/2"></div>
         
@@ -410,16 +407,21 @@ const App = () => {
                   </div>
                 </div>
 
-                <button className="button-primary w-full md:w-auto">
+                <a 
+                  href="https://wa.me/558882235210"
+                  target="_blank"
+                  rel="noopener noreferrer" 
+                  className="button-primary w-full md:w-auto inline-block text-center"
+                >
                   AGENDE SUA VISITA
-                </button>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section id="localizacao" className="py-24 bg-white relative overflow-hidden">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
@@ -476,7 +478,9 @@ const App = () => {
 
             <div className="flex justify-center gap-6">
               <a 
-                href="#" 
+                href="https://www.instagram.com/thainaafirmino/" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-12 h-12 md:w-10 md:h-10 rounded-full bg-primary-50 flex items-center justify-center transition-all duration-300 hover:bg-primary-100"
                 aria-label="Instagram"
               >
@@ -502,13 +506,6 @@ const App = () => {
                   <path d="M9 10a0.5 .5 0 0 0 1 0V9a0.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a0.5 .5 0 0 0 0 -1h-1a0.5 .5 0 0 0 0 1" />
                 </svg>
               </a>
-              <a 
-                href="#" 
-                className="w-12 h-12 md:w-10 md:h-10 rounded-full bg-primary-50 flex items-center justify-center transition-all duration-300 hover:bg-primary-100"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-6 h-6 md:w-5 md:h-5 text-primary-400" />
-              </a>
             </div>
 
             <div className="flex flex-col items-center md:items-end gap-2">
@@ -518,9 +515,14 @@ const App = () => {
               >
                 +55 88 8223-5210
               </a>
-              <button className="px-6 py-2 text-primary-300 hover:text-primary-400 transition-colors border border-primary-100 rounded-full hover:bg-primary-50">
+              <a 
+                href="https://wa.me/558882235210"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-2 text-primary-300 hover:text-primary-400 transition-colors border border-primary-100 rounded-full hover:bg-primary-50"
+              >
                 Agende sua consulta
-              </button>
+              </a>
             </div>
           </div>
 
